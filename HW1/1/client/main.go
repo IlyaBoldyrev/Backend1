@@ -1,10 +1,10 @@
 package main
 
 import (
-	"io"
+	"bufio"
+	"fmt"
 	"log"
 	"net"
-	"os"
 )
 
 func main() {
@@ -13,10 +13,9 @@ func main() {
 		log.Fatal(err)
 	}
 	defer conn.Close()
-	for {
-		_, err = io.Copy(os.Stdout, conn)
-		if err == io.EOF || err != nil {
-			break
-		}
+
+	input := bufio.NewScanner(conn)
+	for input.Scan() {
+		fmt.Println(input.Text())
 	}
 }

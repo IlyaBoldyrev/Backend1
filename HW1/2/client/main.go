@@ -14,6 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 	defer conn.Close()
+	fmt.Println("Enter your nick name:")
 	go func() {
 		io.Copy(os.Stdout, conn)
 	}()
